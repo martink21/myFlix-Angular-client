@@ -9,7 +9,7 @@ const apiUrl = 'https://myflix-21.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRegistrationService {
+export class FetchApiDataService   {
   // Inject the HttpClient module to the constructor params
  // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
@@ -63,13 +63,19 @@ export class UserRegistrationService {
         .pipe(catchError(this.handleError));
     }
   
-    // Add movie to Favorites list (Endpoint: 'users/:username/movies/:movie_id', Method: POST).
-    public addMovieFavorites(username: any, movieId: any): Observable<any> {
-      
-      return this.http
-        .post(apiUrl + `users/${username}/movies/${movieId}`)
-        .pipe(catchError(this.handleError));
-    }
+   // Add movie to Favorites list (Endpoint: 'users/:username/favorites/:movie_id', Method: POST).
+  public addMovieFavorites(username: any, movieId: any): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    // Pass the token in the HTTP header to the call.
+    return this.http
+      .post(apiUrl + `users/${username}/favorites/${movieId}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(catchError(this.handleError));
+  }
   
     // Remove movie from Favorites list (Endpoint: 'users/:username/movies/:movie_id', Method: DELETE).
     public removeMovieFavorites(username: any, movieId: any): Observable<any> {
