@@ -25,11 +25,12 @@ export class FetchApiDataService   {
 
     // User login (Endpoint: 'login', Method: POST).
     public userLogin(userDetails: any): Observable<any> {
+      console.log(userDetails);
       // Send the any argument to the API endpoint and return the API response.
       return this.http
         .post(apiUrl + 'login', userDetails)
         .pipe(catchError(this.handleError));
-    }
+    }  
   
     // Get user (Endpoint: 'users/:username', Method: GET).
     public getUser(username: any): Observable<any> {
