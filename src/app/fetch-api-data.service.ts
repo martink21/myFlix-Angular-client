@@ -33,43 +33,59 @@ export class FetchApiDataService   {
   
     // Get user (Endpoint: 'users/:username', Method: GET).
     public getUser(username: any): Observable<any> {
-      
+      const token = localStorage.getItem('token');
       return this.http
-        .get(apiUrl + `users/${username}`)
+        .get(apiUrl + `users/${username}`, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
     }
   
     // Edit user (Endpoint: 'users/:username', Method: PUT).
     public editUser(userDetails: any): Observable<any> {
-      
+      const token = localStorage.getItem('token');
       return this.http
-        .put(apiUrl + `users/${userDetails.username}`, userDetails )
+        .put(apiUrl + `users/${userDetails.username}`, userDetails, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
     }
   
     // Delete user (Endpoint: 'users/:username', Method: DELETE).
     public deleteUser(username: any): Observable<any> {
-    
+      const token = localStorage.getItem('token');
       return this.http
-        .delete(apiUrl + `users/${username}`)
+        .delete(apiUrl + `users/${username}`, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
     }
   
-    // Get Favorites list (Endpoint: 'users/:username/favorites', Method: GET).
+    // Get Favorites list (Endpoint: 'users/:username/movies', Method: GET).
     public getFavorites(username: any): Observable<any> {
-      
+      const token = localStorage.getItem('token');
       return this.http
-        .get(apiUrl + `users/${username}/favorites`)
+        .get(apiUrl + `users/${username}/movies`, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
     }
   
-   // Add movie to Favorites list (Endpoint: 'users/:username/favorites/:movie_id', Method: POST).
+   // Add movie to Favorites list (Endpoint: 'users/:username/movies/:movie_id', Method: POST).
   public addMovieFavorites(username: any, movieId: any): Observable<any> {
     const token = localStorage.getItem('token');
 
     // Pass the token in the HTTP header to the call.
     return this.http
-      .post(apiUrl + `users/${username}/favorites/${movieId}`, {
+      .post(apiUrl + `users/${username}/movies/${movieId}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -79,13 +95,16 @@ export class FetchApiDataService   {
   
     // Remove movie from Favorites list (Endpoint: 'users/:username/movies/:movie_id', Method: DELETE).
     public removeMovieFavorites(username: any, movieId: any): Observable<any> {
-      
+      const token = localStorage.getItem('token');
       return this.http
-        .delete(apiUrl + `users/${username}/movies/${movieId}`)
+        .delete(apiUrl + `users/${username}/movies/${movieId}`, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
     }
 
-  
     // Get all movies endpoint (Endpoint: 'movies', Method: GET).
     public getAllMovies(): Observable<any> {
       const token = localStorage.getItem('token');
@@ -100,25 +119,37 @@ export class FetchApiDataService   {
   
     // Get one movie endpoint (Endpoint: 'movies/:title', Method: GET).
     public getMovie(movieTitle: any): Observable<any> {
-      
+      const token = localStorage.getItem('token');
       return this.http
-        .get(apiUrl + `movies/${movieTitle}`)
+        .get(apiUrl + `movies/${movieTitle}`, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
-      }
+    }
   
     // Get one genre endpoint (Endpoint: 'genres/:name', Method: GET).
     public getGenre(genreName: any): Observable<any> {
-      
+      const token = localStorage.getItem('token');
       return this.http
-        .get(apiUrl + `genres/${genreName}`)
+        .get(apiUrl + `genres/${genreName}`, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
     }
   
     // Get one director endpoint (Endpoint: 'directors/:name', Method: GET).
     public getDirector(directorName: any): Observable<any> {
-      
+      const token = localStorage.getItem('token');
       return this.http
-        .get(apiUrl + `directors/${directorName}`)
+        .get(apiUrl + `directors/${directorName}`, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
     }
 
