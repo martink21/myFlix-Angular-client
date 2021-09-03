@@ -1,6 +1,5 @@
   
 import { Component, OnInit, Input } from '@angular/core';
-
 // Server-side API calls
 import { FetchApiDataService } from '../fetch-api-data.service';
 
@@ -8,6 +7,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 // Reference to a dialog opened via the MatDialog service.
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login-form',
@@ -16,12 +16,13 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class UserLoginFormComponent implements OnInit {
   @Input() userData = {
-    username: '',
-    password: '',
+    Username: '',
+    Password: '',
   };
 
   constructor(
     public fetchApiData: FetchApiDataService,
+    public router: Router,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar
   ) {}
@@ -34,13 +35,14 @@ export class UserLoginFormComponent implements OnInit {
       // Login successful.
       (response) => {
         // Store current user and token in localStorage.
-        localStorage.setItem('username', response.user.username);
+        localStorage.setItem('username', response.user.Username);
         localStorage.setItem('token', response.token);
 
         this.dialogRef.close();
-        this.snackBar.open(`Welcome back, ${response.user.name}!`, 'OK', {
+        this.snackBar.open(`Welcome back, ${response.user.Username}!`, 'OK', {
           duration: 3000,
         });
+        this.router.navigate(['movies']);
       },
       // Login unsuccessful.
       (response) => {
