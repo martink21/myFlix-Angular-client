@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/internal/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://myflix-21.herokuapp.com/';
@@ -89,9 +88,13 @@ export class FetchApiDataService   {
   
     // Get all movies endpoint (Endpoint: 'movies', Method: GET).
     public getAllMovies(): Observable<any> {
-      
+      const token = localStorage.getItem('token');
       return this.http
-        .get(apiUrl + 'movies')
+        .get(apiUrl + 'movies', {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
         .pipe(catchError(this.handleError));
     }
   
