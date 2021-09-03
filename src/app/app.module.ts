@@ -13,7 +13,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';      
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { UserRegistrationFormComponent} from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
@@ -24,6 +27,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfileDeleteComponent } from './user-profile-delete/user-profile-delete.component';
+import { HeaderComponent } from './header/header.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -41,6 +45,7 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     UserProfileComponent,
     UserProfileDeleteComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,9 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatSnackBarModule,
     RouterModule.forRoot(appRoutes),
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
