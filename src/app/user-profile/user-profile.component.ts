@@ -14,13 +14,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class UserProfileComponent implements OnInit {
   @Input() userData = {
-    name: '',
-    lastName: '',
-    birthday: '',
-    country: '',
-    email: '',
-    username: '',
-    password: '',
+    Birthday: '',
+    Email: '',
+    Username: '',
+    Password: '',
   };
 
   // Store user data returned by the API call.
@@ -45,7 +42,7 @@ export class UserProfileComponent implements OnInit {
     this.fetchApiData.getUser(username).subscribe((resp: any) => {
       this.user = resp;
       this.userData = this.user;
-      this.userData.birthday = this.user.birthday.slice(0, 10);
+      this.userData.Birthday = this.user.Birthday.slice(0, 10);
     });
   }
 
