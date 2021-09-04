@@ -129,11 +129,11 @@ export class FetchApiDataService   {
         .pipe(catchError(this.handleError));
     }
   
-    // Get one genre endpoint (Endpoint: 'genres/:name', Method: GET).
+    // Get one genre endpoint (Endpoint: 'genre/:name', Method: GET).
     public getGenre(genreName: any): Observable<any> {
       const token = localStorage.getItem('token');
       return this.http
-        .get(apiUrl + `genres/${genreName}`, {
+        .get(apiUrl + `genre/${genreName}`, {
           headers: new HttpHeaders({
             Authorization: 'Bearer ' + token,
           }),
