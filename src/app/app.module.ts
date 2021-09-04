@@ -21,6 +21,9 @@ import { UserRegistrationFormComponent} from './user-registration-form/user-regi
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { MovieGenreComponent } from './movie-genre/movie-genre.component';
+import { MovieDirectorComponent } from './movie-director/movie-director.component';
+import { MovieDescriptionComponent } from './movie-description/movie-description.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
@@ -46,6 +49,10 @@ const appRoutes: Routes = [
     UserProfileComponent,
     UserProfileDeleteComponent,
     HeaderComponent,
+    MovieGenreComponent,
+    MovieDirectorComponent,
+    MovieDescriptionComponent,
+
   ],
   imports: [
     BrowserModule,
