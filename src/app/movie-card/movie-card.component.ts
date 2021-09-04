@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
+import { MovieDescriptionComponent } from '../movie-description/movie-description.component';
+import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
+import { MovieDirectorComponent } from '../movie-director/movie-director.component';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -34,24 +38,24 @@ export class MovieCardComponent implements OnInit {
   }
 
   // Open dialog to show movie description through MovieDescriptionComponent.
- /*  openDescriptionDialog(title: string, description: string): void {
+  openDescriptionDialog(title: string, description: string): void {
     this.dialog.open(MovieDescriptionComponent, {
       data: { title, description },
       width: '400px',
     });
-  } */
+  }
 
- /*  // Open dialog to show movie genre through MovieGenreComponent.
+  // Open dialog to show movie genre through MovieGenreComponent.
   openGenreDialog(movieTitle: any, movieGenres: any): void {
-    this.fetchApiData.getGenre(movieGenres[0]).subscribe((genre: any) => {
+    this.fetchApiData.getGenre(movieGenres).subscribe((genre: any) => {
       this.dialog.open(MovieGenreComponent, {
         data: { movieTitle, genre },
         width: '600px',
       });
     });
-  } */
+  } 
 
-/*   // Open dialog to show movie director through MovieDirectorComponent.
+  // Open dialog to show movie director through MovieDirectorComponent.
   openDirectorDialog(movieTitle: any, movieDirector: any): void {
     this.fetchApiData.getDirector(movieDirector).subscribe((director: any) => {
       this.dialog.open(MovieDirectorComponent, {
@@ -59,7 +63,7 @@ export class MovieCardComponent implements OnInit {
         width: '600px',
       });
     });
-  } */
+  }
 
   // Add or remove movies from the Favorites list.
   toggleFavoriteMovie(movieId: any, movieTitle: any): void {
