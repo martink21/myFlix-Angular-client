@@ -1,53 +1,47 @@
 <header>
     <nav class="navbar">
       <div class="wrapper">
-        <mat-toolbar color="warn">
+        <mat-toolbar color="primary">
           <a routerLink="" matTooltip="Home" aria-label="Go to Home">
-            <mat-icon style="margin-right: 0.5rem">theaters</mat-icon>
+            
             <span>myFlix</span>
           </a>
   
-          <span style="flex: 1 1 auto"></span>
+          <span class="nav-buttons" style="flex: 1 1 auto"></span>
           <button
             routerLink="movies"
-            mat-icon-button
+            mat-button
             matTooltip="Movies list"
             aria-label="Go to Movies list"
           >
-            <mat-icon>movie</mat-icon>
+            MOVIES
           </button>
           <button
             routerLink="favorites"
-            mat-icon-button
+            mat-button
             matTooltip="Favorites list"
             aria-label="Go to Favorites list"
           >
-            <mat-icon>favorite</mat-icon>
+            FAVORITES
           </button>
           
           <button
             routerLink="profile"
-            mat-icon-button
+            mat-button
             matTooltip="Profile"
             aria-label="Go to Profile"
           >
-            <mat-icon>account_circle</mat-icon>
+            PROFILE
           </button>
           <button
             (click)="logout()"
-            mat-icon-button
+            mat-button
             matTooltip="Log out"
             aria-label="Log out"
           >
-            <mat-icon>power_settings_new</mat-icon>
+            LOG OUT
           </button>
-          <!-- <button
-            mat-icon-button
-            matTooltip="Menu"
-            aria-label="Navigation bar menu"
-          >
-            <mat-icon>menu</mat-icon>
-          </button> -->
+          
         </mat-toolbar>
       </div>
     </nav>

@@ -18,7 +18,7 @@
             (click)="openDescriptionDialog(movie.Title, movie.Description)"
             style="margin: 0.5rem"
             class="button-card"
-            color="warn"
+            
             aria-label="View synopsis"
           >
             Synopsis
@@ -28,7 +28,7 @@
             (click)="openGenreDialog(movie.Title, movie.Genre.Name)"
             style="margin: 0.5rem"
             class="button-card"
-            color="warn"
+      
             aria-label="View genres"
           >
             Genre
@@ -38,7 +38,7 @@
             (click)="openDirectorDialog(movie.Title, movie.Director.Name)"
             style="margin: 0.5rem"
             class="button-card"
-            color="warn"
+          
             aria-label="View director"
           >
             Director
@@ -49,7 +49,7 @@
               mat-icon-button
               (click)="toggleFavoriteMovie(movie._id, movie.Title)"
               style="margin: 0.5rem 1rem"
-              color="primary"
+              
               matTooltip="Add to Favorites list"
               aria-label="Add to Favorites list"
             >
