@@ -31,11 +31,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfileDeleteComponent } from './user-profile-delete/user-profile-delete.component';
 import { HeaderComponent } from './header/header.component';
+import { UserFavoriteComponent } from './user-favorite/user-favorite.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'favorites', component: UserFavoriteComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -52,6 +54,7 @@ const appRoutes: Routes = [
     MovieGenreComponent,
     MovieDirectorComponent,
     MovieDescriptionComponent,
+    UserFavoriteComponent,
 
   ],
   imports: [
