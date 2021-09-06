@@ -1,6 +1,12 @@
 # MyFlixAngularClient
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.3.
+An app similar to the myFlix-client but built with Angular
+
+### Screenshots
+![](https://snipboard.io/1jlPFr.jpg)
+
+### Link
+https://martink21.github.io/myFlix-Angular-client/
 
 ## Development server
 
