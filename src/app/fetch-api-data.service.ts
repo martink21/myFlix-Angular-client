@@ -118,10 +118,10 @@ export class FetchApiDataService   {
     }
   
     // Get one movie endpoint (Endpoint: 'movies/:title', Method: GET).
-    public getMovie(movieTitle: any): Observable<any> {
+    public getMovie(movieId: any): Observable<any> {
       const token = localStorage.getItem('token');
       return this.http
-        .get(apiUrl + `movies/${movieTitle}`, {
+        .get(apiUrl + `movies/id/${movieId}`, {
           headers: new HttpHeaders({
             Authorization: 'Bearer ' + token,
           }),
