@@ -26,21 +26,22 @@ export class UserFavoriteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getFavoritesMovies();
+    this.getFavoriteMovies();
   }
 
   /**
    * Fetch all movies in user's Favorites list
    * @returns All movies stored in the user's Favorites list
    */
-  getFavoritesMovies(): void {
+  getFavoriteMovies(): void {
     this.fetchApiData.getFavorites(this.username).subscribe((resp: any) => {
-      const favoriteMovies = resp.favoriteMovies;
+      const favoriteMovieIds = resp;
 
-      favoriteMovies.forEach((favoriteMovie: any) => {
-        this.fetchApiData.getMovie(favoriteMovie).subscribe((resp: any) => {
+      favoriteMovieIds.forEach((favoriteMovieId: any) => {
+        this.fetchApiData.getMovie(favoriteMovieId).subscribe((resp: any) => {
           this.movies.push(resp);
         });
+        console.log(this.movies);
         return this.movies;
       });
     });
@@ -93,7 +94,7 @@ export class UserFavoriteComponent implements OnInit {
    */
   toggleFavoriteMovie(movieId: any, movieTitle: any): void {
     this.fetchApiData.getFavorites(this.username).subscribe((resp: any) => {
-      const favoriteMovies = resp.favoriteMovies;
+      const favoriteMovies = resp;
 
       if (favoriteMovies.includes(movieId)) {
         this.fetchApiData
