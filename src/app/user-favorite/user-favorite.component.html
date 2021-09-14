@@ -3,9 +3,7 @@
     <div class="movie-container">
       <mat-card class="custom-card" *ngFor="let movie of movies">
         <mat-card-header class="custom-card-header">
-          <mat-card-title class="custom-card-title">{{
-            movie.Title
-          }}</mat-card-title>
+          <mat-card-title class="custom-card-title">{{ movie.Title }}</mat-card-title>
           <mat-card-subtitle>Directed by: {{ movie.Director.Name }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content [style.margin]="'0'" class="custom-card-content">
