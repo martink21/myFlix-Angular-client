@@ -17,7 +17,8 @@ export class MovieCardComponent implements OnInit {
   // Store the movies returned by the API call.
   movies: any[] = [];
   // Set user's username.
-  username = localStorage.getItem('username');
+  //username = localStorage.getItem('username');
+  faves: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -27,6 +28,8 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getUsersFavs();
+
   }
 
   // Fetch all movies from database.
@@ -65,36 +68,49 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Add or remove movies from the Favorites list.
-  toggleFavoriteMovie(movieId: any, movieTitle: any): void {
-    this.fetchApiData.getFavorites(this.username).subscribe((resp: any) => {
-      const favoriteMovies = resp;
+  /**
+   * Adds move to users favorites list
+  */
+   addToFavoriteMoviesList(movieId: any, movieTitle: any): void {
+    this.fetchApiData.addMovieFavorites(movieId).subscribe((res: any) => {
+      this.snackBar.open(`${movieTitle} has been added to favorties`, 'OK', {
+        duration: 3000,
+      })
+      return this.getUsersFavs();
+    })
+  }
 
-      if (favoriteMovies.includes(movieId)) {
-        this.fetchApiData
-          .removeMovieFavorites(this.username, movieId)
-          .subscribe(() => {
-            this.snackBar.open(
-              `"${movieTitle}" was removed from your Favorites list!`,
-              'OK',
-              {
-                duration: 3000,
-              }
-            );
-          });
-      } else {
-        this.fetchApiData
-          .addMovieFavorites(this.username, movieId)
-          .subscribe(() => {
-            this.snackBar.open(
-              `"${movieTitle}" was added to your Favorites list!`,
-              'OK',
-              {
-                duration: 3000,
-              }
-            );
-          });
-      }
+  /**
+   * Removed movie from users favorites list
+  */
+  removeFromFavorites(movieId: any, movieTitle: any): void {
+   this.fetchApiData.removeMovieFavorites(movieId).subscribe((res: any) => {
+     this.snackBar.open(`${movieTitle} has been removed from favorties`, 'OK', {
+       duration: 3000,
+     })
+     return this.getUsersFavs();
+   })
+  }
+  /**
+   * Returns a list of the users favorites movie._id's
+  */
+
+   getUsersFavs(): void {
+    const user = localStorage.getItem('username');
+    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+      this.faves = resp.FavoriteMovies;
+      //console.log(this.faves);
+      return this.faves;
     });
+  }
+  /**
+   * Compares movie id's with getUsersFavs returned list to set the Favorites icon to add/remove correctly
+  */
+  setFaveStatus(movieId: any): any {
+    if (this.faves.includes(movieId)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

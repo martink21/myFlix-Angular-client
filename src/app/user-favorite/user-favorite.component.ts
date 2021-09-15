@@ -17,7 +17,9 @@ export class UserFavoriteComponent implements OnInit {
   // Store the favorites movies returned by the API call.
   movies: any[] = [];
   // Set user's username.
-  username = localStorage.getItem('username');
+  user: any = {};
+  faves: any[] = [];
+  favorites: any = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -26,25 +28,79 @@ export class UserFavoriteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getFavoriteMovies();
+    this.getMovies();
+    this.getUsersFavs();
+  }
+
+  getUsersFavs(): void {
+    const user = localStorage.getItem('username');
+    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+      this.faves = resp.FavoriteMovies;
+      console.log(this.faves);
+      return this.faves;
+    });
+  }
+
+  getUser(): void {
+    let user = localStorage.getItem('username');
+    this.fetchApiData.getUser(user).subscribe((res: any) => {
+      this.user = res ;
+      this.getMovies();
+    });
+  }
+
+  getMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => { 
+      this.movies = resp;
+      console.log(this.movies);
+      return this.filterFavorites(); // Calls the filter function when calling movies to show only favorites
+    });
   }
 
   /**
-   * Fetch all movies in user's Favorites list
-   * @returns All movies stored in the user's Favorites list
-   */
-  getFavoriteMovies(): void {
-    this.fetchApiData.getFavorites(this.username).subscribe((resp: any) => {
-      const favoriteMovieIds = resp;
-
-      favoriteMovieIds.forEach((favoriteMovieId: any) => {
-        this.fetchApiData.getMovie(favoriteMovieId).subscribe((resp: any) => {
-          this.movies.push(resp);
-        });
-        console.log(this.movies);
-        return this.movies;
-      });
+   * Filters movies to display only the users favorites
+  */
+  filterFavorites(): void {
+    this.movies.forEach((movie: any) => {
+      if (this.faves.includes(movie._id)) {
+        this.favorites.push(movie);
+      }//console.log(this.favorites);
     });
+    return this.favorites; // Calls a reload for a dynamic removal from list
+  }
+
+  addToFavoriteMoviesList(movieId: any, movieTitle: any): void {
+    this.fetchApiData.addMovieFavorites(movieId).subscribe((res: any) => {
+      //let favMovies = res.Favorites;
+      this.snackBar.open(`${movieTitle} has been added to favorties`, 'OK', {
+        duration: 3000,
+      })
+      return this.getUsersFavs();
+    })
+  }
+
+  removeFromFavorites(movieId: any, movieTitle: any): void {
+   this.fetchApiData.removeMovieFavorites(movieId).subscribe((res: any) => {
+     //let favMovies = res.Favorites;
+     this.snackBar.open(`${movieTitle} has been removed from favorties`, 'OK', {
+       duration: 3000,
+     })
+     setTimeout(function () {
+      window.location.reload();
+     }, 3500);
+     return this.getUsersFavs();
+   })
+  }
+
+  /**
+   * Allows for dynamic loading of favorites icon to display on/off of favorites
+  */
+  setFaveStatus(movieId: any): any {
+    if (this.faves.includes(movieId)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -84,43 +140,6 @@ export class UserFavoriteComponent implements OnInit {
         data: { movieTitle, director },
         width: '600px',
       });
-    });
-  }
-
-  /**
-   * Add or remove movies from the Favorites list
-   * @param movieId
-   * @param movieTitle
-   */
-  toggleFavoriteMovie(movieId: any, movieTitle: any): void {
-    this.fetchApiData.getFavorites(this.username).subscribe((resp: any) => {
-      const favoriteMovies = resp;
-
-      if (favoriteMovies.includes(movieId)) {
-        this.fetchApiData
-          .removeMovieFavorites(this.username, movieId)
-          .subscribe(() => {
-            this.snackBar.open(
-              `"${movieTitle}" was removed from your Favorites list!`,
-              'OK',
-              {
-                duration: 3000,
-              }
-            );
-          });
-      } else {
-        this.fetchApiData
-          .addMovieFavorites(this.username, movieId)
-          .subscribe(() => {
-            this.snackBar.open(
-              `"${movieTitle}" was added to your Favorites list!`,
-              'OK',
-              {
-                duration: 3000,
-              }
-            );
-          });
-      }
     });
   }
 }

@@ -80,7 +80,8 @@ export class FetchApiDataService   {
     }
   
    // Add movie to Favorites list (Endpoint: 'users/:username/movies/:movie_id', Method: POST).
-  public addMovieFavorites(username: any, movieId: any): Observable<any> {
+  public addMovieFavorites(movieId: any): Observable<any> {
+    const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
 
     // Pass the token in the HTTP header to the call.
@@ -94,7 +95,8 @@ export class FetchApiDataService   {
   }
   
     // Remove movie from Favorites list (Endpoint: 'users/:username/movies/:movie_id', Method: DELETE).
-    public removeMovieFavorites(username: any, movieId: any): Observable<any> {
+    public removeMovieFavorites(movieId: any): Observable<any> {
+      const username = localStorage.getItem('username');
       const token = localStorage.getItem('token');
       return this.http
         .delete(apiUrl + `users/${username}/movies/${movieId}`, {

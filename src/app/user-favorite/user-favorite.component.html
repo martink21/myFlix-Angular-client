@@ -46,17 +46,9 @@
           </button>
           
           <div>
-            <button
-              mat-icon-button
-              (click)="toggleFavoriteMovie(movie._id, movie.Title)"
-              style="margin: 0.5rem 1rem"
-              color="primary"
-              matTooltip="Add to Favorites list"
-              aria-label="Add to Favorites list"
-            >
-              <mat-icon>favorite_border</mat-icon>
-            </button>
-          </div>
+            <mat-icon *ngIf="!setFaveStatus(movie._id)" (click)="addToFavoriteMoviesList(movie._id, movie.Title)" class="favorite-button">favorite_border</mat-icon>
+            <mat-icon *ngIf="setFaveStatus(movie._id)" (click)="removeFromFavorites(movie._id, movie.Title)" class="favorite-button-active">favorite</mat-icon>
+            </div>
         </mat-card-actions>
       </mat-card>
     </div>
