@@ -86,7 +86,7 @@ export class FetchApiDataService   {
 
     // Pass the token in the HTTP header to the call.
     return this.http
-      .post(apiUrl + `users/${username}/movies/${movieId}`, {
+      .post(apiUrl + `users/${username}/movies/${movieId}`,{}, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
