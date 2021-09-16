@@ -120,8 +120,8 @@ export class UserFavoriteComponent implements OnInit {
    * @param movieTitle
    * @param movieGenres
    */
-  openGenreDialog(movieTitle: any, movieGenres: any): void {
-    this.fetchApiData.getGenre(movieGenres/*[0]*/).subscribe((genre: any) => {
+  openGenreDialog(movieTitle: any, genreName: any): void {
+    this.fetchApiData.getGenre(genreName).subscribe((genre: any) => {
       this.dialog.open(MovieGenreComponent, {
         data: { movieTitle, genre },
         width: '600px',
