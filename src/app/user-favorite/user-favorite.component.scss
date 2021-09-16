@@ -8,6 +8,10 @@
     margin: 2rem 0;
   }
   
+  .favorite-button:hover, .favorite-button-active:hover{
+    cursor: pointer;
+  }
+  
   .movie-container {
     min-height: 100vh;
     margin: 1rem 0;

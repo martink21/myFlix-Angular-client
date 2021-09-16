@@ -2,6 +2,10 @@
     max-width: 1200px;
     margin: 0 auto;
   }
+
+.favorite-button:hover, .favorite-button-active:hover{
+  cursor: pointer;
+}
   
   .movie-container {
     min-height: 100vh;
