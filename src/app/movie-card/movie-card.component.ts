@@ -49,8 +49,8 @@ export class MovieCardComponent implements OnInit {
   }
 
   // Open dialog to show movie genre through MovieGenreComponent.
-  openGenreDialog(movieTitle: any, movieGenres: any): void {
-    this.fetchApiData.getGenre(movieGenres).subscribe((genre: any) => {
+  openGenreDialog(movieTitle: any, movieGenre: any): void {
+    this.fetchApiData.getGenre(movieGenre).subscribe((genre: any) => {
       this.dialog.open(MovieGenreComponent, {
         data: { movieTitle, genre },
         width: '600px',
